@@ -1,5 +1,4 @@
 exports.poll = (ctx) => {
-  console.log(`pollController.poll ${ctx.params.name}`);
   try {
     if (!ctx.params.name) {
       return ctx.render('home');

@@ -15,15 +15,20 @@ app
   })
   // Serve static files
   .use(require('koa-static')(path.join(__dirname, 'public')))
-  // Load pug
+  // Load pug (with cache enabled in prod)
   .use(pug('views', { cache: (process.env.NODE_ENV === 'production') }))
   // Load routes
   .use(router.routes())
   .use(router.allowedMethods());
 
-// Log errors
+// Log development errors
 app.on('error', (err, ctx) => console.error('server error', err, ctx || null));
 
-if (!module.parent) app.listen(3000);
+// TODO log production errors
+
+if (!module.parent) {
+  app.listen(3000);
+  console.log('Koa is listening on port 3000');
+}
 
 module.exports = app;
