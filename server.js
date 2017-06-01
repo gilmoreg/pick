@@ -1,6 +1,7 @@
+const path = require('path');
 const Koa = require('koa');
 const pug = require('js-koa-pug');
-const { router } = require('./routes');
+const router = require('./routes');
 
 const app = new Koa();
 
@@ -12,6 +13,8 @@ app
     const ms = new Date() - start;
     console.log(`${ctx.method}: ${ctx.url || ''} - ${ms}ms`);
   })
+  // Serve static files
+  .use(require('koa-static')(path.join(__dirname, 'public')))
   // Load pug
   .use(pug('views', { cache: (process.env.NODE_ENV === 'production') }))
   // Load routes
