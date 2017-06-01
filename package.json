@@ -6,7 +6,9 @@
   "scripts": {
     "start": "forever start server.js",
     "dev": "nodemon server.js",
-    "test": "jest --verbose --bail --forceExit"
+    "test": "jest --verbose --bail --forceExit",
+    "watch": "jest --verbose --bail --watch",
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
