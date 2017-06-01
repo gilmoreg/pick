@@ -25,13 +25,18 @@
   },
   "homepage": "https://github.com/gilmoreg/pick#readme",
   "dependencies": {
-    "koa": "^2.2.0"
+    "js-koa-pug": "^1.0.3",
+    "koa": "^2.2.0",
+    "koa-router": "^7.2.0"
   },
   "devDependencies": {
+    "babel-loader": "^7.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
     "jest": "^20.0.4",
-    "supertest": "^3.0.0"
+    "node-mocks-http": "^1.6.2",
+    "supertest": "^3.0.0",
+    "webpack": "^2.6.1"
   }
 }
