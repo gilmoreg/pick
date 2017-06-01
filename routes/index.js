@@ -7,10 +7,10 @@ const catchErrors = fn =>
     fn(ctx, next).catch(next);
 
 router.get('/', ctx => ctx.render('home'));
-
+/*
 router.get('/:name', catchErrors(pollController.poll));
 
 router.get('/mal/check/:name', catchErrors(malController.check));
 router.get('/mal/list/:name', catchErrors(malController.list));
-
+*/
 module.exports = { router, catchErrors };
