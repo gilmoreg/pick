@@ -1,0 +1,23 @@
+{
+  "name": "pick",
+  "version": "1.0.0",
+  "description": "Create a poll from your Myanimelist Plan To Watch list!",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --verbose --bail --forceExit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gilmoreg/pick.git"
+  },
+  "keywords": [
+    "anime",
+    "myanimelist"
+  ],
+  "author": "Grayson Gilmore (gilmoreg@live.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gilmoreg/pick/issues"
+  },
+  "homepage": "https://github.com/gilmoreg/pick#readme"
+}
