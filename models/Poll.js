@@ -4,15 +4,23 @@ const mongodbErrorHandler = require('mongoose-mongodb-errors');
 mongoose.Promise = global.Promise;
 
 const pollSchema = mongoose.Schema({
-  username: {
+  user: {
     type: String,
-    unique: true,
     trim: true,
     required: 'Please supply a username',
   },
   list: [
     {
-      anime: { type: mongoose.Schema.ObjectId, ref: 'Anime' },
+      title: {
+        type: String,
+        required: 'You must supply a title.',
+        trim: true,
+      },
+      id: {
+        type: Number,
+        required: 'You must supply an id.',
+        trim: true,
+      },
       votes: [
         // Stored as a list of IP addresses
         {
@@ -26,7 +34,7 @@ const pollSchema = mongoose.Schema({
 });
 
 // Index username for faster searching
-pollSchema.index({ username: 1 });
+pollSchema.index({ user: 1 });
 // Make prettier error messages
 pollSchema.plugin(mongodbErrorHandler);
 

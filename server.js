@@ -12,9 +12,6 @@ mongoose.connect(process.env.DATABASE || 'mongodb://localhost:27017/pick');
 mongoose.connection.on('error', (err) => {
   console.error(`Mongoose error: ${err.message}`);
 });
-// Load models
-require('./models/Poll');
-require('./models/Anime');
 
 // Add middleware
 app
