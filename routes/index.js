@@ -4,8 +4,6 @@ const pollController = require('../controllers/poll');
 
 router.get('/', ctx => ctx.render('home'));
 router.get('/:name', pollController.poll);
-
-router.get('/mal/check/:name', malController.check);
-router.get('/mal/list/:name', malController.list);
+router.get('/mal/list/', malController.list);
 
 module.exports = router;

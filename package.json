@@ -5,12 +5,12 @@
   "main": "server.js",
   "scripts": {
     "start": "forever start server.js",
-    "dev": "nodemon server.js",
+    "dev": "nodemon --inspect server.js",
     "build": "webpack",
     "devbuild": "webpack --progress --watch",
     "test": "jest --verbose --bail --forceExit",
     "watch": "jest --verbose --bail --watch",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage --forceExit"
   },
   "repository": {
     "type": "git",
@@ -30,13 +30,16 @@
     "js-koa-pug": "^1.0.3",
     "koa": "^2.2.0",
     "koa-router": "^7.2.0",
-    "koa-static": "^3.0.0"
+    "koa-static": "^3.0.0",
+    "node-fetch": "^1.7.0",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "babel-loader": "^7.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.3.0",
+    "fetch-mock": "^5.11.0",
     "jest": "^20.0.4",
     "node-mocks-http": "^1.6.2",
     "sinon": "^2.3.2",
