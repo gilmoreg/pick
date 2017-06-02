@@ -12,7 +12,8 @@ const createPoll = poll =>
   new Promise(async (resolve, reject) => {
     await Poll.findOneAndRemove({ user: poll.user });
     const { user, list } = poll;
-    Poll.create({ user, list, created: (new Date()).getTime() })
+    const created = new Date().getTime();
+    Poll.create({ user, list, created })
     .then(res => resolve(res))
     .catch(err => reject(err));
   });
