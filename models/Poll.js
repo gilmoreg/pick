@@ -31,6 +31,7 @@ const pollSchema = mongoose.Schema({
       ],
     },
   ],
+  created: { type: Number },
 });
 
 // Index username for faster searching
