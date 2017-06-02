@@ -2,6 +2,7 @@ sudo: required
 language: node_js
 node_js: node
 services:
+- mongodb
 - docker
 # after_success: bash ./deploy.sh
 branches:
