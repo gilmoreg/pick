@@ -24,7 +24,7 @@ const checkMalCredentials = auth =>
         if (res === 'Invalid credentials') resolve(res);
         parser.parseString(res, async (err, data) => {
           if (err) reject(Error(err));
-          if (data.user && data.user.username) resolve(data.user.username[0]);
+          if (data && data.user && data.user.username) resolve(data.user.username[0]);
           reject(Error(data));
         });
       }
