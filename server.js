@@ -1,10 +1,22 @@
 const path = require('path');
 const Koa = require('koa');
 const pug = require('js-koa-pug');
+const mongoose = require('mongoose');
 const router = require('./routes');
 
 const app = new Koa();
+mongoose.Promise = global.Promise;
 
+// Start up Mongoose
+mongoose.connect(process.env.DATABASE || 'mongodb://localhost:27017/pick');
+mongoose.connection.on('error', (err) => {
+  console.error(`Mongoose error: ${err.message}`);
+});
+// Load models
+require('./models/Poll');
+require('./models/Anime');
+
+// Add middleware
 app
   // Log all requests with response time
   .use(async (ctx, next) => {
@@ -26,6 +38,7 @@ app.on('error', (err, ctx) => console.error('server error', err, ctx || null));
 
 // TODO log production errors
 
+// Start server
 if (!module.parent) {
   app.listen(3000);
   console.log('Koa is listening on port 3000');
