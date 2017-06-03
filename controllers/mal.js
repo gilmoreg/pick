@@ -1,18 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const pollController = require('./poll');
+const { errResponse } = require('../helpers');
 const xml2js = require('xml2js');
 // Fetch has to be require'd this way for testing purposes
 global.fetch = require('node-fetch');
 
 const parser = new xml2js.Parser();
 mongoose.Promise = global.Promise;
-
-const errResponse = (ctx, status, msg) => {
-  ctx.status = status;
-  ctx.body = { errors: [{ msg, status }] };
-  return ctx;
-};
 
 const malAPICall = (auth, url) =>
   new Promise((resolve, reject) => {

@@ -1,10 +1,15 @@
 const router = require('koa-router')();
+const koaBody = require('koa-body')();
 const malController = require('../controllers/mal');
 const pollController = require('../controllers/poll');
 
 router.get('/', ctx => ctx.render('home'));
-router.get('/:name/vote', pollController.vote);
+router.post('/:name/vote', koaBody, pollController.vote);
 router.get('/:name', pollController.poll);
 router.get('/mal/list/', malController.list);
+router.use((ctx) => {
+  const err = new Error('No routes matched');
+  ctx.throw(err, 401);
+});
 
 module.exports = router;

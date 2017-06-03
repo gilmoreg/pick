@@ -1,9 +1,6 @@
 const Poll = require('../models/Poll');
-/*
-What needs to happen here?
+const { errResponse } = require('../helpers');
 
-For just rendering a poll, we need an animelist; we get that from the *database*
-*/
 exports.createPoll = poll =>
   new Promise(async (resolve, reject) => {
     await Poll.findOneAndRemove({ user: poll.user });
@@ -35,11 +32,18 @@ exports.poll = async (ctx) => {
 exports.vote = async (ctx) => {
   try {
     const { name: user } = ctx.params;
-    const { id: vote } = ctx.request.query;
+    const { id } = ctx.request.body;
 
-    const poll = await Poll.findOne({ user });
+    const voted = await Poll.findOne({ user, votes: ctx.request.ip }, { _id: 1 });
+    if (voted) return errResponse(ctx, 400, 'You have already voted in this poll!');
 
-    ctx.body = { ip: ctx.request.ip, user, vote, poll };
+    /* const poll = await Poll.update(
+      { user },
+      { $set:
+        { 'list.$.name': 'updated item2', },
+      }); */
+
+    ctx.body = { ip: ctx.request.ip, user, id };
     return ctx.body;
   } catch (err) {
     return ctx.throw(400, new Error(`GET /:name/vote failure: ${err}`));

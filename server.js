@@ -1,5 +1,6 @@
 const path = require('path');
 const Koa = require('koa');
+const cors = require('kcors');
 const pug = require('js-koa-pug');
 const mongoose = require('mongoose');
 const router = require('./routes');
@@ -28,7 +29,9 @@ app
   .use(pug('views', { cache: (process.env.NODE_ENV === 'production') }))
   // Load routes
   .use(router.routes())
-  .use(router.allowedMethods());
+  .use(router.allowedMethods())
+  // CORS
+  .use(cors);
 
 // Log development errors
 app.on('error', (err, ctx) => console.error('server error', err, ctx || null));
