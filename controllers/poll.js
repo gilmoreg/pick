@@ -35,9 +35,8 @@ exports.vote = async (ctx) => {
     const { id } = ctx.request.body;
 
     const poll = await Poll.update(
-      { user },
-      { $set:
-        { 'list.$.name': 'updated item2', },
+      { user, 'list.id': id },
+      { $inc: { 'list.$.votes': 1 },
       });
 
     ctx.body = { user, id, poll };
