@@ -22,6 +22,10 @@ const pollSchema = mongoose.Schema({
         required: 'You must supply an id.',
         trim: true,
       },
+      image: {
+        type: String,
+        trim: true,
+      },
       votes: Number,
     },
   ],

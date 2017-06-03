@@ -23,10 +23,8 @@ exports.poll = async (ctx) => {
     const { name: user } = ctx.params;
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
-    const cleanList = poll.list.map(i => ({ title: i.title, id: i.id, votes: i.votes.length }));
     if (poll) {
-      ctx.locals = { poll };
-      return ctx.render('poll', { title: poll.user, user: poll.user, list: cleanList });
+      return ctx.render('poll', { poll });
     }
     return ctx.render('home'); // TODO with an error
   } catch (err) {

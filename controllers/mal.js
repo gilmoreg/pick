@@ -63,7 +63,7 @@ const getPlanToWatch = (list) => {
       const airDate = new Date(a.series_start);
       return (now - airDate >= 0);
     })
-    .map(a => ({ title: a.series_title[0], id: a.series_animedb_id[0] }));
+    .map(a => ({ title: a.series_title[0], image: a.series_image[0], id: a.series_animedb_id[0], votes: 0 }));
   return Promise.resolve(filtered);
 };
 
