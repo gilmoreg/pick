@@ -33,3 +33,17 @@ exports.poll = async (ctx) => {
     return ctx.throw(400, new Error(`GET /:name failure: ${err}`));
   }
 };
+
+exports.vote = async (ctx) => {
+  try {
+    const { name: user } = ctx.params;
+    const { id: vote } = ctx.request.query;
+
+    const poll = await Poll.findOne({ user });
+
+    ctx.body = { ip: ctx.request.ip, user, vote, poll };
+    return ctx.body;
+  } catch (err) {
+    return ctx.throw(400, new Error(`GET /:name/vote failure: ${err}`));
+  }
+};

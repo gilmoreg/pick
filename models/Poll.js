@@ -22,27 +22,23 @@ const pollSchema = mongoose.Schema({
         required: 'You must supply an id.',
         trim: true,
       },
-      votes: [
-        // Stored as a list of IP addresses
-        {
-          _id: false,
-          type: String,
-          trim: true,
-          unique: 'You cannot vote twice on the same poll.',
-        },
-      ],
+      votes: Number,
+    },
+  ],
+  votes: [
+    // Stored as a list of IP addresses
+    {
+      _id: false,
+      type: String,
+      trim: true,
+      unique: 'You cannot vote twice on the same poll.',
     },
   ],
   created: { type: Number },
 });
 
 // Index username for faster searching
-pollSchema.index({ user: 1 });
-// Static method for returning a template-friendly list
-/* pollSchema.virtual('votingList').get(function () { // eslint-disable-line func-names
-  return this.user; // .map(a => ({ title: a.title, id: a.id, votes: a.votes.length }));
-});*/
-
+pollSchema.index({ user: 1, votes: 1 });
 // Make prettier error messages
 pollSchema.plugin(mongodbErrorHandler);
 
