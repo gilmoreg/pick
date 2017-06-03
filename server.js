@@ -3,6 +3,7 @@ const Koa = require('koa');
 const cors = require('kcors');
 const pug = require('js-koa-pug');
 const mongoose = require('mongoose');
+const cookie = require('./controllers/cookie');
 const router = require('./routes');
 
 const app = new Koa();
@@ -23,6 +24,8 @@ app
     const ms = new Date() - start;
     console.log(`${ctx.method}: ${ctx.url || ''} - ${ms}ms`);
   })
+  // Parse cookies
+  .use(cookie)
   // Serve static files
   .use(require('koa-static')(path.join(__dirname, 'public')))
   // Load pug (with cache enabled in prod)

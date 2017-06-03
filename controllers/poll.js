@@ -1,3 +1,4 @@
+const uuidV4 = require('uuid/v4');
 const Poll = require('../models/Poll');
 const { errResponse } = require('../helpers');
 
@@ -14,14 +15,22 @@ exports.createPoll = poll =>
 
 exports.poll = async (ctx) => {
   try {
+    console.log('cookies', ctx.cookie, '\n\n\n\n\n', ctx.cookies);
+    if (!ctx.cookie.pickID) {
+      const pickID = uuidV4();
+      ctx.cookie.set('pickID', pickID);
+      ctx.cookie.pickID = pickID;
+      console.log(ctx.cookie.pickID);
+    }
     if (!ctx.params.name) {
       return ctx.render('home');
     }
     const { name: user } = ctx.params;
+    const { pickID } = ctx.cookie;
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
     if (poll) {
-      return ctx.render('poll', { poll });
+      return ctx.render('poll', { user, poll, pickID });
     }
     return ctx.render('home'); // TODO with an error
   } catch (err) {
@@ -34,6 +43,8 @@ exports.vote = async (ctx) => {
     const { name: user } = ctx.params;
     const { id } = ctx.request.body;
 
+    // Check to see if this IP has cast a vote already
+    // TODO whitelist certain IPs (like localhost)
     const voted = await Poll.findOne({ user, votes: ctx.request.ip }, { _id: 1 });
     if (voted) return errResponse(ctx, 400, 'You have already voted in this poll!');
 
