@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
-const Poll = require('../models/Poll');
+const pollController = require('./poll');
 const xml2js = require('xml2js');
 // Fetch has to be require'd this way for testing purposes
 global.fetch = require('node-fetch');
@@ -8,15 +8,11 @@ global.fetch = require('node-fetch');
 const parser = new xml2js.Parser();
 mongoose.Promise = global.Promise;
 
-const createPoll = poll =>
-  new Promise(async (resolve, reject) => {
-    await Poll.findOneAndRemove({ user: poll.user });
-    const { user, list } = poll;
-    const created = new Date().getTime();
-    Poll.create({ user, list, created })
-    .then(res => resolve(res))
-    .catch(err => reject(err));
-  });
+const errResponse = (ctx, status, msg) => {
+  ctx.status = status;
+  ctx.body = { errors: [{ msg, status }] };
+  return ctx;
+};
 
 const malAPICall = (auth, url) =>
   new Promise((resolve, reject) => {
@@ -97,16 +93,17 @@ exports.list = async (ctx) => {
       const list = await getMalList(user);
       if (list && list.length) {
         // If we got a good list, create a poll and return it as JSON
-        const poll = await createPoll({ user, list });
+        const poll = await pollController.createPoll({ user, list });
         ctx.body = { poll };
-        return ctx.body;
+        return ctx;
       }
       // Good credentials but no anime; must be empty profile
-      return ctx.throw(400, 'No anime found for that user.');
+      return errResponse(ctx, 400, 'No anime found for that user.');
     }
-    // No list; either bad credentials or empty profile
-    return ctx.throw(400, 'Invalid MAL credentials.');
+    // Bad credentials
+    return errResponse(ctx, 400, 'Bad password or user not found.');
   } catch (err) {
+    // Something worse happened
     return ctx.throw(400, new Error(`/mal/list ${err}`));
   }
 };

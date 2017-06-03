@@ -8,7 +8,7 @@ describe('Poll Controller', () => {
   it('GET / should render home.pug', async (done) => {
     const result = await request.get('/');
     expect(result.statusCode).toBe(200);
-    expect(result.text).toEqual(expect.stringContaining('<h1>Home</h1>'));
+    expect(result.text).toEqual(expect.stringContaining('Create a Poll'));
     done();
   });
 

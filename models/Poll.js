@@ -11,6 +11,7 @@ const pollSchema = mongoose.Schema({
   },
   list: [
     {
+      _id: false,
       title: {
         type: String,
         required: 'You must supply a title.',
@@ -24,6 +25,7 @@ const pollSchema = mongoose.Schema({
       votes: [
         // Stored as a list of IP addresses
         {
+          _id: false,
           type: String,
           trim: true,
           unique: 'You cannot vote twice on the same poll.',
@@ -36,6 +38,11 @@ const pollSchema = mongoose.Schema({
 
 // Index username for faster searching
 pollSchema.index({ user: 1 });
+// Static method for returning a template-friendly list
+/* pollSchema.virtual('votingList').get(function () { // eslint-disable-line func-names
+  return this.user; // .map(a => ({ title: a.title, id: a.id, votes: a.votes.length }));
+});*/
+
 // Make prettier error messages
 pollSchema.plugin(mongodbErrorHandler);
 

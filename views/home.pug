@@ -1,4 +1,27 @@
 extends layout
 
+block styles
+  link(rel="stylesheet" href="home.css")
+
 block content
-  h1 Home
+  .section#credentials
+    .columns
+      .column.is-narrow.div.mcenter
+        .card
+          header.card-header
+            p.card-header-title Create a Poll
+          .card-content
+            .content
+              form.tcenter(id='credentials')
+                p Please enter your MyAnimeList login.
+                p These values will never be stored.
+                .field
+                  p.control.tcenter
+                    input(type='text' id='mal-username' placeholder='mal username')
+                .field
+                  p.control.tcenter
+                    input(type='password' id='mal-password' placeholder='mal password')
+                  .mal-error.error
+                .field
+                  p.control.tcenter
+                    button.button#submit Submit
