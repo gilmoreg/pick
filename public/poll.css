@@ -1,0 +1,10 @@
+#poll {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+#poll li {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

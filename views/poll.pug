@@ -1,8 +1,18 @@
 extends layout
 
+block styles
+  link(rel="stylesheet" href="poll.css")
+
 block content
-  h1 Poll - #{user}
-  ul
-    each anime in list
-      li #[a(href=`https://myanimelist.net/anime/${anime.id}/` rel='noopener noreferrer' target='_blank' title=anime.title) #{anime.title}] #{anime.votes}
+  .section#poll
+    .columns
+      .column.is-narrow.div.mcenter
+        .card
+          header.card-header
+            p.card-header-title Poll - #{user}
+          .card-content
+            .content
+              ul
+                each anime in list
+                  li #[a(href=`https://myanimelist.net/anime/${anime.id}/` rel='noopener noreferrer' target='_blank' title=anime.title) #{anime.title}] #{anime.votes}
       
