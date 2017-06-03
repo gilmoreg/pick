@@ -29,20 +29,11 @@ const pollSchema = mongoose.Schema({
       votes: Number,
     },
   ],
-  votes: [
-    // Stored as a list of IP addresses
-    {
-      _id: false,
-      type: String,
-      trim: true,
-      unique: 'You cannot vote twice on the same poll.',
-    },
-  ],
   created: { type: Number },
 });
 
 // Index username for faster searching
-pollSchema.index({ user: 1, votes: 1 });
+pollSchema.index({ user: 1 });
 // Make prettier error messages
 pollSchema.plugin(mongodbErrorHandler);
 
