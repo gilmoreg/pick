@@ -1,9 +1,10 @@
 const path = require('path');
 const Koa = require('koa');
+const rateLimit = require('koa2-rate-limit').rateLimit;
 const cors = require('kcors');
 const pug = require('js-koa-pug');
 const mongoose = require('mongoose');
-const cookie = require('./controllers/cookie');
+const { cookieParser } = require('./middleware/cookie');
 const router = require('./routes');
 
 const app = new Koa();
@@ -24,8 +25,19 @@ app
     const ms = new Date() - start;
     console.log(`${ctx.method}: ${ctx.url || ''} - ${ms}ms`);
   })
+  // Enforce rate limit
+  .use(rateLimit({
+    routes:
+    [
+      { method: 'POST', path: '/:name/vote' },
+    ],
+    interval: 10 * 60 * 1000, // 10 minutes
+    max: 1,
+    // whitelist: [],
+    // blacklist: [],
+  }))
   // Parse cookies
-  .use(cookie)
+  .use(cookieParser)
   // Serve static files
   .use(require('koa-static')(path.join(__dirname, 'public')))
   // Load pug (with cache enabled in prod)
