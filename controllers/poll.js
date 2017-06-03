@@ -14,10 +14,6 @@ exports.createPoll = poll =>
 
 exports.poll = async (ctx) => {
   try {
-    let pickID = null;
-    if (ctx.cookie && ctx.cookie.pickID) {
-      pickID = ctx.cookie.pickID;
-    }
     if (!ctx.params.name) {
       return ctx.render('home');
     }
@@ -25,7 +21,7 @@ exports.poll = async (ctx) => {
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
     if (poll) {
-      return ctx.render('poll', { user, poll, pickID });
+      return ctx.render('poll', { user, poll });
     }
     return ctx.render('home'); // TODO with an error
   } catch (err) {
