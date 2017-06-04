@@ -4,7 +4,7 @@ block styles
   link(rel="stylesheet" href="home.css")
 
 block content
-  .section#credentials
+  .section#createPoll
     .columns
       .column.is-narrow.div.mcenter
         .card
@@ -12,7 +12,7 @@ block content
             p.card-header-title Create a Poll
           .card-content
             .content
-              form.tcenter(id='credentials')
+              form.tcenter(id='credentials' action='/mal/list' method='post')
                 p Please enter your MyAnimeList login.
                 p These values will never be stored.
                 .field
@@ -24,7 +24,20 @@ block content
                   .mal-error.error
                 .field
                   p.control.tcenter
-                    button(disabled).button#submit Submit
+                    button(disabled).button#submitForm Submit
+  .section.hidden#newList
+    .columns
+      .column.is-narrow.div.mcenter
+        .card
+          header.card-header
+            p.card-header-title Create a Poll
+          .card-content
+            .content
+              p Success! Your poll can be found here:
+              p here be a link
+              p post on reddit
+              p tweet out
+              p bbcode
 
 block scripts
   script(type="text/javascript" src="/scripts/home.js")

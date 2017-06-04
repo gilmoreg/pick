@@ -119,7 +119,7 @@ exports.check = async (ctx) => {
       return ctx;
     }
     // Invalid credentials
-    ctx.status = 400;
+    ctx.status = 200;
     ctx.body = { message: 'invalid' };
     return ctx;
   } catch (err) {
