@@ -1,0 +1,22 @@
+extends layout
+
+block styles
+  link(rel="stylesheet" href="poll.css")
+
+block content
+  .section#poll
+    .is-narrow.div.mcenter
+      .card
+        header.card-header
+          p.card-header-title Poll - #{user}
+        .card-content
+          .content
+            ul
+              each anime in poll.list
+                li
+                  .columns.is-mobile
+                    .column.is-10
+                      a(href=`https://myanimelist.net/anime/${anime.id}/` rel='noopener noreferrer' target='_blank' title=anime.title) #{anime.title}
+                    .column.is-2
+                      #{anime.votes}
+      

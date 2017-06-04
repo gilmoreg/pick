@@ -29,10 +29,10 @@ app
   .use(rateLimit({
     routes:
     [
-      { method: 'POST', path: '/:name/vote' },
+      { method: 'POST', path: /\/.+\/vote/i },
     ],
-    interval: 10 * 60 * 1000, // 10 minutes
-    max: 1,
+    interval: 10000,
+    max: 2,
     // whitelist: [],
     // blacklist: [],
   }))

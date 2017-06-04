@@ -21,6 +21,7 @@ exports.poll = async (ctx) => {
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
     if (poll) {
+      poll.list = poll.list.sort((a, b) => (a.votes < b.votes ? 1 : -1));
       return ctx.render('poll', { user, poll });
     }
     return ctx.render('home'); // TODO with an error
