@@ -7,6 +7,8 @@ exports.createPoll = poll =>
     const { user, list } = poll;
     const created = new Date().getTime();
     Poll.create({ user, list, created })
+    // Return only necessary data
+    .then(res => ({ user: res.user, list: res.list }))
     .then(res => resolve(res))
     .catch(err => reject(err));
   });

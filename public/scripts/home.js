@@ -148,7 +148,7 @@ __webpack_require__(0);
       const malUser = user.value.trim();
       const malPass = pass.value.trim();
       submit.classList.add('is-loading');
-      apiCall('/mal/list', { auth: btoa(`${malUser}:${malPass}`) }).then(res => {
+      apiCall('/mal/create', { auth: btoa(`${malUser}:${malPass}`) }).then(res => {
         console.log('newList', res);
         showList();
       }).catch(err => console.error(Error(err)));

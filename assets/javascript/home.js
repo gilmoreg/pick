@@ -61,7 +61,7 @@ require('./bling.js');
       const malUser = user.value.trim();
       const malPass = pass.value.trim();
       submit.classList.add('is-loading');
-      apiCall('/mal/list', { auth: btoa(`${malUser}:${malPass}`) })
+      apiCall('/mal/create', { auth: btoa(`${malUser}:${malPass}`) })
       .then((res) => {
         console.log('newList', res);
         showList();
