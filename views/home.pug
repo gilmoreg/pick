@@ -17,14 +17,14 @@ block content
                 p These values will never be stored.
                 .field
                   p.control.tcenter
-                    input(type='text' id='mal-username' placeholder='mal username')
+                    input(type='text' id='mal-username' placeholder='mal username' required)
                 .field
                   p.control.tcenter
-                    input(type='password' id='mal-password' placeholder='mal password')
+                    input(type='password' id='mal-password' placeholder='mal password' required)
                   .mal-error.error
                 .field
                   p.control.tcenter
-                    button.button#submit Submit
+                    button(disabled).button#submit Submit
 
 block scripts
   script(type="text/javascript" src="/scripts/home.js")

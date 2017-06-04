@@ -39,9 +39,13 @@ exports.vote = async (ctx) => {
       { user, 'list.id': id },
       { $inc: { 'list.$.votes': 1 },
       });
-
-    ctx.body = { user, id, poll };
-    return ctx.body;
+    if (poll) {
+      ctx.status = 200;
+      ctx.body = { user, id, poll };
+      return ctx.body;
+    }
+    // Nothing found in the db
+    return errResponse(ctx, 404, 'Poll not found');
   } catch (err) {
     return ctx.throw(400, new Error(`GET /:name/vote failure: ${err}`));
   }
