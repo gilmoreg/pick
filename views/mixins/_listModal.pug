@@ -3,13 +3,10 @@ mixin listModal(anime = {})
     .modal-background
     .modal-content
       .box(style='max-width: 400px; margin: 0 auto')
-        article.media
-          .media-left
-            figure
-              img(src=anime.image width='80px' style='border-radius: 2px')
-          .media-content
-            .content
-              a(href=`https://myanimelist.net/anime/${anime.id}/` rel='noopener noreferrer' target='_blank' title=anime.title) #{anime.title}
-        p(style='text-align: center; padding-top: 20px')
+        p.tcenter
+          a(href=`https://myanimelist.net/anime/${anime.id}/` rel='noopener noreferrer' target='_blank' title=anime.title) #{anime.title}
+        figure.tcenter
+          img(src=anime.image width='80px' style='border-radius: 2px')
+        p.tcenter
           button.button.is-primary(style='width: 100%') Vote!
     button.modal-close
