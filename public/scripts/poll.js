@@ -94,16 +94,9 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 __webpack_require__(0);
 
 (() => {
-  function closeModal(e) {
+  function closeModal() {
     const modal = $('.is-active');
-    modal.classList.remove('is-active');
-    console.log('close', e);
-  }
-
-  function closeParentModal(e) {
-    const modal = e.target.parentElement;
-    modal.classList.remove('is-active');
-    console.log('close parent', modal.classList);
+    if (modal) modal.classList.remove('is-active');
   }
 
   function openModal(e) {
@@ -129,11 +122,7 @@ __webpack_require__(0);
   });
 
   window.addEventListener('keyup', e => {
-    if (e.key === 'Escape') {
-      // const modal = $('.is-active');
-      // if (modal) modal.classList.remove('is-active');
-      closeModal(e);
-    }
+    if (e.key === 'Escape') closeModal(e);
   });
 })();
 
