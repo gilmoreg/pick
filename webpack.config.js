@@ -1,12 +1,15 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   devtool: 'source-map',
   entry: {
-    filename: './assets/javascript/app.js',
+    home: './assets/javascript/home.js',
+    poll: './assets/javascript/poll.js',
   },
   output: {
-    filename: './public/bundle.js',
+    path: path.join(__dirname, 'public/scripts'),
+    filename: '[name].js',
   },
   module: {
     rules: [

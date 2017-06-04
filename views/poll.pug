@@ -11,8 +11,12 @@ block content
       h1 Poll - #{user}
         ul
           each anime in poll.list
-            li
+            li(data-animeID=anime.id)
               .columns.is-mobile
                 .column.is-10 #{anime.title}
                 .column.is-2 #{anime.votes}
-              +listModal(anime)
+  each anime in poll.list
+    +listModal(anime)            
+
+block scripts
+  script(type="text/javascript" src="/scripts/poll.js")

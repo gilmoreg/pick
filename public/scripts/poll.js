@@ -63,17 +63,80 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
+/* bling.js */
+
+// Modified to make $ querySelector and $$ qSA
+window.$ = document.querySelector.bind(document);
+window.$$ = document.querySelectorAll.bind(document);
+Node.prototype.on = window.on = function (name, fn) {
+  this.addEventListener(name, fn);
+};
+NodeList.prototype.__proto__ = Array.prototype;
+NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn) {
+  this.forEach(function (elem, i) {
+    elem.on(name, fn);
+  });
+};
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* globals $, $$, window */
+__webpack_require__(0);
+
 (() => {
-  console.log('hey');
+  function closeModal(e) {
+    const modal = $('.is-active');
+    modal.classList.remove('is-active');
+    console.log('close', e);
+  }
+
+  function closeParentModal(e) {
+    const modal = e.target.parentElement;
+    modal.classList.remove('is-active');
+    console.log('close parent', modal.classList);
+  }
+
+  function openModal(e) {
+    // So that the anchors aren't circumvented by preventDefault
+    if (e.target.tagName === 'A') return;
+    e.preventDefault();
+    // Open the modal
+    const modal = $(`#modal-${this.dataset.animeid}`);
+    if (modal) modal.classList.add('is-active');
+  }
+
+  const lis = Array.from($$('[data-animeID]'));
+  lis.forEach(li => {
+    li.on('click', openModal);
+  });
+  const closers = Array.from($$('.modal-close'));
+  closers.forEach(closer => {
+    closer.on('click', closeModal);
+  });
+  const backgrounds = Array.from($$('.modal-background'));
+  backgrounds.forEach(background => {
+    background.on('click', closeModal);
+  });
+
+  window.addEventListener('keyup', e => {
+    if (e.key === 'Escape') {
+      // const modal = $('.is-active');
+      // if (modal) modal.classList.remove('is-active');
+      closeModal(e);
+    }
+  });
 })();
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=poll.js.map
