@@ -33,8 +33,6 @@ app
     ],
     interval: 10000,
     max: 2,
-    // whitelist: [],
-    // blacklist: [],
   }))
   // Parse cookies
   .use(cookieParser)
