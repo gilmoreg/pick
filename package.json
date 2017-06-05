@@ -4,7 +4,7 @@
   "description": "Create a poll from your Myanimelist Plan To Watch list!",
   "main": "server.js",
   "scripts": {
-    "start": "forever start server.js",
+    "start": "npm run build && forever start server.js",
     "dev": "nodemon --inspect server.js",
     "build": "webpack",
     "devbuild": "webpack --progress --watch",
