@@ -2,11 +2,11 @@ mixin listModal(anime = {})
   .modal(id=`modal-${anime.id}`)
     .modal-background
     .modal-content
-      .box(style='max-width: 400px; margin: 0 auto')
+      .box.modal-box
         p.tcenter
           a(href=`https://myanimelist.net/anime/${anime.id}/` rel='noopener noreferrer' target='_blank' title=anime.title) #{anime.title}
         figure.tcenter
-          img(src=anime.image width='80px' style='border-radius: 2px')
+          img(src=anime.image)
         p.tcenter
-          button.button.is-primary(style='width: 100%') Vote!
+          button.button.is-primary.vote-button Vote!
     button.modal-close

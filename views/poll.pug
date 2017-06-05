@@ -8,13 +8,13 @@ block styles
 block content
   .section#poll
     .is-narrow.div.mcenter
-      h1 Poll - #{user}
-        ul
-          each anime in poll.list
-            li(data-animeID=anime.id)
-              .columns.is-mobile
-                .column.is-10 #{anime.title}
-                .column.is-2 #{anime.votes}
+      h1.tcenter What should #[a(href=`http://myanimelist.net/profile/${user}` rel='oopener noreferrer' target='_blank') #{user}] watch next?
+      ul
+        each anime in poll.list
+          li(data-animeID=anime.id)
+            .columns.is-mobile
+              .column.is-10 #{anime.title}
+              .column.is-2.vote-count #{anime.votes}
   each anime in poll.list
     +listModal(anime)            
 

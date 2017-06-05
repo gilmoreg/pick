@@ -4,7 +4,22 @@
 }
 
 #poll li {
-  width: auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding-top: 5px;
+}
+
+.vote-count {
+  text-align: right;
+}
+
+.modal-box {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.modal-box img {
+  border-radius: 2px;
+}
+
+.vote-button {
+  width: 100%;
 }
