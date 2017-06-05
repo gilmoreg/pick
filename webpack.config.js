@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     home: './assets/javascript/home.js',
     poll: './assets/javascript/poll.js',
+    clipboard: './assets/javascript/clipboard.min.js',
   },
   output: {
     path: path.join(__dirname, 'public/scripts'),
