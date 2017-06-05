@@ -19,12 +19,14 @@ exports.result = async (ctx) => {
       return ctx.render('home');
     }
     const { name: user } = ctx.params;
+    let vote = null;
+    if (ctx.cookie && ctx.cookie.vote && ctx.cookie.vote[user]) vote = ctx.cookie.vote[user];
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
     if (poll) {
       // Sort votes on result page
       poll.list = poll.list.sort((a, b) => (a.votes < b.votes ? 1 : -1));
-      return ctx.render('result', { user, poll });
+      return ctx.render('result', { user, poll, vote });
     }
     return ctx.render('home', { error: `Poll ${user} not found.` });
   } catch (err) {
