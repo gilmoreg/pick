@@ -19,9 +19,7 @@ block content
         h1.tcenter Vote Totals:
         ul
           each anime in poll.list
-            li(data-animeID=anime.id)
+            li(data-animeID=anime.id, style='cursor: default')
               .columns.is-mobile
                 .column.is-10 #{anime.title}
                 .column.is-2.vote-count #{anime.votes}        
-
-block scripts

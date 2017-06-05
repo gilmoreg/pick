@@ -10,8 +10,12 @@ html(lang="en-US")
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700")
     block styles
   body
-    nav
-      h1 Pick.moe
+    nav.nav.has-shadow
+      .nav-left
+        .nav-item
+          p(style='color: black; font-size: 24px') Pick.moe
+      .nav-right
+        a.button.is-primary.nav-item() Create or Edit Your Poll
     main
       block content
 

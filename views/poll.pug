@@ -11,11 +11,12 @@ block content
   .section#poll
     .is-narrow.div.mcenter
       h1.tcenter What should #[a(href=`http://myanimelist.net/profile/${user}` rel='oopener noreferrer' target='_blank') #{user}] watch next?
-      ul
-        each anime in poll.list
-          li(data-animeID=anime.id)
-            .columns.is-mobile
-              .column.is-12.tcenter #{anime.title}
+      .box  
+        ul
+          each anime in poll.list
+            li(data-animeID=anime.id)
+              .columns.is-mobile
+                .column.is-12.tcenter #{anime.title}
   each anime in poll.list
     +listModal(anime)            
 
