@@ -15,16 +15,13 @@ exports.createPoll = poll =>
 
 
 exports.poll = async (ctx) => {
-  console.log('polling');
   try {
     if (!ctx.params.name) {
       return ctx.render('home');
     }
-    console.log('got a name', Poll);
     const { name: user } = ctx.params;
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
-    console.log('poll result', poll);
     if (poll) {
       poll.list = poll.list.sort((a, b) => (a.votes < b.votes ? 1 : -1));
       return ctx.render('poll', { user, poll });
