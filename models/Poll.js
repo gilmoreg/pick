@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const mongodbErrorHandler = require('mongoose-mongodb-errors');
 
 mongoose.Promise = global.Promise;
 
@@ -34,7 +33,5 @@ const pollSchema = mongoose.Schema({
 
 // Index username for faster searching
 pollSchema.index({ user: 1 });
-// Make prettier error messages
-pollSchema.plugin(mongodbErrorHandler);
 
 module.exports = mongoose.model('Poll', pollSchema);
