@@ -23,14 +23,23 @@ h1, h4 {
 
 nav {
   background-color: #363942;
-	padding: 5px;
 	font-size: 22px;
   text-align: center;
   width: 100%;
 }
 
-nav h1 {
-  color:white;
+nav p {
+  color: white;
+  font-size: 24px;
+}
+
+nav a {
+  margin-top: 8px;
+  margin-right: 10px;
+}
+
+.nav-left, .nav-right {
+  background-color: #363942;
 }
 
 main {
@@ -59,7 +68,7 @@ footer {
   font-size: 9px;
   text-align: center;
   background-color: #363942;
-  height: 5em;
+  height: 5.5em;
 }
 
 footer p {
