@@ -59,9 +59,10 @@ exports.vote = async (ctx) => {
       { $inc: { 'list.$.votes': 1 },
       });
     if (poll) {
+      ctx.cookies.set(user, id, { httpOnly: false });
       ctx.status = 200;
       ctx.body = { user, id, poll };
-      return ctx.body;
+      return ctx;
     }
     // Nothing found in the db
     return errResponse(ctx, 404, 'Poll not found');

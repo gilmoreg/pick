@@ -16,6 +16,7 @@ require('./bling.js');
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     })
     .then(res => res.json());
 
