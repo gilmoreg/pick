@@ -104,6 +104,6 @@ exports.list = async (ctx) => {
     return errResponse(ctx, 400, 'Bad password or user not found.');
   } catch (err) {
     // Something worse happened
-    return ctx.throw(400, new Error(`/mal/list ${err}`));
+    return ctx.throw(400, new Error(`/mal/create ${err}`));
   }
 };
