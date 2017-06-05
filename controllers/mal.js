@@ -107,22 +107,3 @@ exports.list = async (ctx) => {
     return ctx.throw(400, new Error(`/mal/list ${err}`));
   }
 };
-
-exports.check = async (ctx) => {
-  try {
-    const { auth } = ctx.request.body;
-    const user = await checkMalCredentials(auth);
-    if (user && user !== 'Invalid credentials') {
-      // Valid credentials
-      ctx.status = 200;
-      ctx.body = { message: 'valid' };
-      return ctx;
-    }
-    // Invalid credentials
-    ctx.status = 200;
-    ctx.body = { message: 'invalid' };
-    return ctx;
-  } catch (err) {
-    return ctx.throw(400, new Error(`/mal/check ${err}`));
-  }
-};

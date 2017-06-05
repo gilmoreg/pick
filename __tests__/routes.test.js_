@@ -1,5 +1,4 @@
 /* globals describe, it, expect */
-// const httpMocks = require('node-mocks-http');
 const router = require('../routes');
 
 describe('Routes', () => {

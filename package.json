@@ -49,6 +49,7 @@
     "jest": "^20.0.4",
     "node-mocks-http": "^1.6.2",
     "sinon": "^2.3.2",
+    "sinon-mongoose": "^2.0.2",
     "supertest": "^3.0.0",
     "webpack": "^2.6.1"
   }
