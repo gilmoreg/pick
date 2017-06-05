@@ -58,7 +58,12 @@ const getPlanToWatch = (list) => {
       const airDate = new Date(a.series_start);
       return (now - airDate >= 0);
     })
-    .map(a => ({ title: a.series_title[0], image: a.series_image[0], id: a.series_animedb_id[0], votes: 0 }));
+    .map(a => (
+      { title: a.series_title[0],
+        image: a.series_image[0],
+        id: a.series_animedb_id[0],
+        votes: 0,
+      }));
   return Promise.resolve(filtered);
 };
 
@@ -76,7 +81,7 @@ exports.list = async (ctx) => {
   let auth;
   // Check if credentials are present
   try {
-    auth = ctx.request.query.auth;
+    auth = ctx.request.body.auth;
   } catch (err) {
     return ctx.throw(400, 'You must supply MAL credentials.');
   }
@@ -100,5 +105,24 @@ exports.list = async (ctx) => {
   } catch (err) {
     // Something worse happened
     return ctx.throw(400, new Error(`/mal/list ${err}`));
+  }
+};
+
+exports.check = async (ctx) => {
+  try {
+    const { auth } = ctx.request.body;
+    const user = await checkMalCredentials(auth);
+    if (user && user !== 'Invalid credentials') {
+      // Valid credentials
+      ctx.status = 200;
+      ctx.body = { message: 'valid' };
+      return ctx;
+    }
+    // Invalid credentials
+    ctx.status = 200;
+    ctx.body = { message: 'invalid' };
+    return ctx;
+  } catch (err) {
+    return ctx.throw(400, new Error(`/mal/check ${err}`));
   }
 };

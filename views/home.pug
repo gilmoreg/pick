@@ -4,7 +4,7 @@ block styles
   link(rel="stylesheet" href="home.css")
 
 block content
-  .section#credentials
+  .section#createPoll
     .columns
       .column.is-narrow.div.mcenter
         .card
@@ -12,19 +12,50 @@ block content
             p.card-header-title Create a Poll
           .card-content
             .content
-              form.tcenter(id='credentials')
+              form.tcenter(id='credentials' action='/mal/list' method='post')
                 p Please enter your MyAnimeList login.
-                p These values will never be stored.
+                p These values will never be stored. #[i(id='help' class='fa fa-question-circle-o' aria-hidden='true')]
                 .field
                   p.control.tcenter
-                    input(type='text' id='mal-username' placeholder='mal username')
+                    input(type='text' id='mal-username' placeholder='mal username' required)
                 .field
                   p.control.tcenter
-                    input(type='password' id='mal-password' placeholder='mal password')
+                    input(type='password' id='mal-password' placeholder='mal password' required)
                   .mal-error.error
                 .field
                   p.control.tcenter
-                    button.button#submit Submit
+                    button.button#submitForm Submit
+  .section.hidden#newList
+    .columns
+      .column.is-narrow.div.mcenter
+        .card
+          .card-content
+            .content
+              p Success! Your poll can be found here:
+              p.tcenter#link link goes here
+              p.tcenter
+                button#reddit Post on reddit #[i(class='fa fa-reddit' aria-hidden='true')]
+              p.tcenter#twitter
+  .modal#helpModal
+    .modal-background
+    .modal-content
+      .box(style='max-width: 400px; margin: 0 auto')
+        h4.tcenter Why do I have to enter my password?
+        p This is to ensure that only the owners of Myanimelist accounts can reset their lists. Otherwise anyone could reset your vote total at any time!
+        h4.tcenter Is it secure?
+        p Pick uses the same technology that MAL does for security. Your credentials will be passed along to MAL to make sure you are a valid user, and then immediately discarded. #[a(href='https://github.com/gilmoreg/pick/blob/master/controllers/mal.js' rel='noopener noreferrer' target='_blank') See the source code here].
+    button.modal-close
+  .modal#redditModal
+    .modal-background
+    .modal-content
+      .box(style='max-width: 400px; margin: 0 auto')
+        p.tcenter#reddit Post on reddit #[i(class='fa fa-reddit' aria-hidden='true')]
+        p.tcenter Copy and paste into a Reddit comment!
+        p.tcenter #[input(id="reddit-md")]
+          button.copy(data-clipboard-target='#reddit-md') #[i(class='fa fa-clipboard' aria-hidden='true')]
+    button.modal-close
 
 block scripts
+  script(src="https://platform.twitter.com/widgets.js" charset="utf-8")
+  script(type="text/javascript" src="/scripts/clipboard.min.js")
   script(type="text/javascript" src="/scripts/home.js")
