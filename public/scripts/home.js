@@ -99,21 +99,6 @@ __webpack_require__(0);
   const credentials = $('#credentials');
   const clipboard = new Clipboard('.copy');
 
-  function debounce(func, wait, immediate, ...args) {
-    let timeout;
-    return () => {
-      const context = this;
-      const later = () => {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  }
-
   const apiCall = (url, body) => fetch(url, {
     method: 'post',
     body: JSON.stringify(body),
@@ -122,22 +107,6 @@ __webpack_require__(0);
       'Content-Type': 'application/json'
     }
   }).then(res => res.json());
-
-  const checkCredentials = debounce(() => {
-    const malUser = user.value.trim();
-    const malPass = pass.value.trim();
-    submit.disabled = true;
-
-    // MAL uses HTTP Basic Auth, btoa generates the required string
-    // This is all that is sent to the server
-    apiCall('/mal/check', { auth: btoa(`${malUser}:${malPass}`) }).then(res => {
-      if (res && res.message && res.message === 'valid') {
-        // Currently entered credentials are valid
-        submit.disabled = false;
-        submit.classList.add('is-primary');
-      }
-    }).catch(err => console.error(Error(err)));
-  }, 250);
 
   function showList(poll) {
     const url = `https://pick.moe/${poll.user}`;
@@ -161,11 +130,10 @@ __webpack_require__(0);
   }
 
   // Event listeners
-  user.on('keyup', checkCredentials);
-  pass.on('keyup', checkCredentials);
   credentials.on('submit', submitForm);
   clipboard.on('success', () => {
     // show a tooltip
+    console.log('copied');
   });
 
   // Open the help modal
