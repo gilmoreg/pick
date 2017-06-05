@@ -1,7 +1,5 @@
 extends layout
 
-include mixins/_listModal
-
 block styles
   link(rel="stylesheet" href="poll.css")
 
@@ -13,9 +11,8 @@ block content
         each anime in poll.list
           li(data-animeID=anime.id)
             .columns.is-mobile
-              .column.is-12 #{anime.title}
-  each anime in poll.list
-    +listModal(anime)            
+              .column.is-10 #{anime.title}
+              .column.is-2.vote-count #{anime.votes}        
 
 block scripts
   script(type="text/javascript" src="/scripts/poll.js")
