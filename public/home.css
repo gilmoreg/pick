@@ -6,3 +6,16 @@
 #help {
   font-size: 14px;
 }
+
+#newList p {
+  margin-bottom: 5px;
+}
+
+#reddit, #reddit-md {
+  border-radius: 2px;
+} 
+
+hr {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}

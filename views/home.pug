@@ -30,14 +30,13 @@ block content
   .section.hidden#newList
     .columns
       .column.is-narrow.div.mcenter
-        .card
-          .card-content
-            .content
-              p Success! Your poll can be found here:
-              p.tcenter#link link goes here
-              p.tcenter
-                button#reddit Post on reddit #[i(class='fa fa-reddit' aria-hidden='true')]
-              p.tcenter#twitter
+        .box(style='max-width: 400px; margin: 0 auto')
+          p.tcenter Success! Your poll can be found here:
+          p.tcenter#link link goes here
+          p.tcenter
+            button#reddit Post on reddit #[i(class='fa fa-reddit' aria-hidden='true')]
+          p.tcenter#twitter
+          p.tcenter Need to refresh your list or reset votes? Just log in again on the homepage!
   .modal#helpModal
     .modal-background
     .modal-content
@@ -52,6 +51,7 @@ block content
     .modal-content
       .box(style='max-width: 400px; margin: 0 auto')
         p.tcenter#reddit Post on reddit #[i(class='fa fa-reddit' aria-hidden='true')]
+        hr
         p.tcenter Copy and paste into a Reddit comment!
         p.tcenter #[input(id="reddit-md")]
           button.copy(data-clipboard-target='#reddit-md') #[i(class='fa fa-clipboard' aria-hidden='true')]
