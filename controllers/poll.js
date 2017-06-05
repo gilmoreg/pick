@@ -13,6 +13,24 @@ exports.createPoll = poll =>
     .catch(err => reject(err));
   });
 
+exports.result = async (ctx) => {
+  try {
+    if (!ctx.params.name) {
+      return ctx.render('home');
+    }
+    const { name: user } = ctx.params;
+    // Get a poll from the database
+    const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
+    if (poll) {
+      // Sort votes on result page
+      poll.list = poll.list.sort((a, b) => (a.votes < b.votes ? 1 : -1));
+      return ctx.render('result', { user, poll });
+    }
+    return ctx.render('home', { error: `Poll ${user} not found.` });
+  } catch (err) {
+    return ctx.throw(400, new Error(`GET /:name/result failure: ${err}`));
+  }
+};
 
 exports.poll = async (ctx) => {
   try {
@@ -22,11 +40,8 @@ exports.poll = async (ctx) => {
     const { name: user } = ctx.params;
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
-    if (poll) {
-      poll.list = poll.list.sort((a, b) => (a.votes < b.votes ? 1 : -1));
-      return ctx.render('poll', { user, poll });
-    }
-    return ctx.render('home'); // TODO with an error
+    if (poll) return ctx.render('poll', { user, poll });
+    return ctx.render('home', { error: `Poll ${user} not found.` });
   } catch (err) {
     return ctx.throw(400, new Error(`GET /:name failure: ${err}`));
   }
