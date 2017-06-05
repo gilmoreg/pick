@@ -5,6 +5,7 @@
 
 #poll li {
   padding-top: 5px;
+  cursor: pointer;
 }
 
 .vote-count {
