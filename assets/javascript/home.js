@@ -1,4 +1,4 @@
-/* globals $, btoa, fetch */
+/* globals $, btoa, fetch, Clipboard */
 require('./bling.js');
 
 (() => {
@@ -6,6 +6,7 @@ require('./bling.js');
   const pass = $('#mal-password');
   const submit = $('#submitForm');
   const credentials = $('#credentials');
+  const clipboard = new Clipboard('.copy');
 
   function debounce(func, wait, immediate, ...args) {
     let timeout;
@@ -51,8 +52,12 @@ require('./bling.js');
     .catch(err => console.error(Error(err)));
   }, 250);
 
-  function showList() {
-    // console.log(newList);
+  function showList(poll) {
+    const url = `https://pick.moe/${poll.user}`;
+    $('#link').innerHTML = `<a href="${url}" rel="noopener noreferrer" target="_blank">${url}</a>`;
+    $('#reddit').value = `Pick something from my PTW list! [pick.moe/${poll.user}](${url})`;
+    $('.twitter-share-button').setAttribute('data-text', `Pick something from my PTW list! ${url}`);
+    $('#newList').classList.remove('hidden');
   }
 
   function submitForm(e) {
@@ -63,14 +68,30 @@ require('./bling.js');
       submit.classList.add('is-loading');
       apiCall('/mal/create', { auth: btoa(`${malUser}:${malPass}`) })
       .then((res) => {
-        console.log('newList', res);
-        showList();
+        submit.classList.remove('is-loading');
+        if (res.poll) showList(res.poll);
       })
       .catch(err => console.error(Error(err)));
     }
   }
 
+  // Event listeners
   user.on('keyup', checkCredentials);
   pass.on('keyup', checkCredentials);
   credentials.on('submit', submitForm);
+  clipboard.on('success', () => {
+    // show a tooltip
+  });
+
+  // Open the help modal
+  $('#help').on('click', () => {
+    $('#helpModal').classList.add('is-active');
+  });
+  // Close the help modal
+  $('.modal-background').on('click', () => {
+    $('.is-active').classList.remove('is-active');
+  });
+  $('.modal-close').on('click', () => {
+    $('.is-active').classList.remove('is-active');
+  });
 })();

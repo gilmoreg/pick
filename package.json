@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/gilmoreg/pick#readme",
   "dependencies": {
+    "clipboard": "^1.7.1",
     "js-koa-pug": "^1.0.3",
     "kcors": "^2.2.1",
     "koa": "^2.2.0",
