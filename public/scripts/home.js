@@ -132,7 +132,7 @@ __webpack_require__(0);
   // Event listeners
   credentials.on('submit', submitForm);
   clipboard.on('success', () => {
-    // show a tooltip
+    // TODO show a tooltip
     console.log('copied');
   });
 

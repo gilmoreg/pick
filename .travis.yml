@@ -4,7 +4,7 @@ node_js: node
 services:
 - mongodb
 - docker
-# after_success: bash ./deploy.sh
+after_success: bash ./deploy.sh
 branches:
   only:
       - master

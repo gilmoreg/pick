@@ -47,7 +47,7 @@ require('./bling.js');
   // Event listeners
   credentials.on('submit', submitForm);
   clipboard.on('success', () => {
-    // show a tooltip
+    // TODO show a tooltip
     console.log('copied');
   });
 

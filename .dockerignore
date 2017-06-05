@@ -3,3 +3,4 @@ notes
 .env
 coverage
 .gitattributes
+public/scripts
