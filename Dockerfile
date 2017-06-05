@@ -5,7 +5,7 @@ RUN npm install forever -g
 
 # Prevent npm install from running unless package.json changes
 COPY ./package.json src/
-RUN cd src && npm install
+RUN cd src && npm install --prefer-offline
 
 COPY . /src
 WORKDIR src/

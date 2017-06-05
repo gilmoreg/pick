@@ -41,8 +41,12 @@ require('./bling.js');
       .then((res) => {
         submit.classList.remove('is-loading');
         if (res.poll) showList(res.poll);
+        else throw Error('Username and password did not match.');
       })
-      .catch(err => console.error(Error(err)));
+      .catch((err) => {
+        // TODO
+        console.error(Error(err));
+      });
     }
   }
 
