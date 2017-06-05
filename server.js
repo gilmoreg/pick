@@ -55,8 +55,9 @@ app.on('error', (err, ctx) => console.error('server error', err, ctx || null));
 
 // Start server
 if (!module.parent) {
-  app.listen(3000);
-  console.log('Koa is listening on port 3000');
+  const port = process.env.PORT || 3000;
+  app.listen(port);
+  console.log(`Koa is listening on port ${port}`);
 }
 
 module.exports = app;
