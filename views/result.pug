@@ -1,18 +1,27 @@
 extends layout
 
 block styles
-  link(rel="stylesheet" href="poll.css")
+  link(rel="stylesheet" href="../bulma.css")
+  link(rel="stylesheet" href="../style.css")
+  link(rel="stylesheet" href="../poll.css")
 
 block content
   .section#poll
     .is-narrow.div.mcenter
-      h1.tcenter What should #[a(href=`http://myanimelist.net/profile/${user}` rel='oopener noreferrer' target='_blank') #{user}] watch next?
-      ul
-        each anime in poll.list
-          li(data-animeID=anime.id)
-            .columns.is-mobile
-              .column.is-10 #{anime.title}
-              .column.is-2.vote-count #{anime.votes}        
+      h1.tcenter #[a(href=`http://myanimelist.net/profile/${user}` rel='oopener noreferrer' target='_blank') #{user}] should watch:
+      .box
+        .content
+          p.tcenter
+            a(href=`https://myanimelist.net/anime/${poll.list[0].id}/` rel='noopener noreferrer' target='_blank' title=poll.list[0].title) #{poll.list[0].title}
+          figure.tcenter
+            img(src=poll.list[0].image)
+      .box
+        h1.tcenter Vote Totals:
+        ul
+          each anime in poll.list
+            li(data-animeID=anime.id)
+              .columns.is-mobile
+                .column.is-10 #{anime.title}
+                .column.is-2.vote-count #{anime.votes}        
 
 block scripts
-  script(type="text/javascript" src="/scripts/poll.js")

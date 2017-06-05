@@ -12,7 +12,8 @@ const Poll = (() => {
       },
       credentials: 'include',
     })
-    .then(res => res.json());
+    .then(res => res.json())
+    .catch(err => Error(err));
 
   const closeModal = () => {
     const modal = $('.is-active');
@@ -31,16 +32,18 @@ const Poll = (() => {
   const vote = function () { // eslint-disable-line func-names
     this.classList.add('is-loading');
     const id = $('.is-active').id.split('-')[1];
-    apiCall(`${window.location.pathname}/vote`, { id })
+    let url = window.location.pathname;
+    if (url[url.length - 1] === '/') url = url.slice(0, -1);
+    apiCall(`${url}/vote`, { id })
     .then(() => {
-      window.location.assign(window.location.pathname);
+      window.location.assign(`${url}/result`);
     })
     .catch((err) => {
       this.classList.remove('is-loading');
       // Have we voted already?
-      if (err.includes('429')) {
+      // if (err.includes('429')) {
         // TODO error
-      }
+      // }
       console.error(err);
     });
   };

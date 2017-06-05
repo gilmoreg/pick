@@ -18,7 +18,8 @@ require('./bling.js');
       },
       credentials: 'include',
     })
-    .then(res => res.json());
+    .then(res => res.json())
+    .catch(err => Error(err));
 
   function showList(poll) {
     const url = `https://pick.moe/${poll.user}`;
