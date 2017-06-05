@@ -89,7 +89,7 @@ NodeList.prototype.on = NodeList.prototype.addEventListener = function (name, fn
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* globals $, btoa, fetch, Clipboard */
+/* globals $, $$, btoa, fetch, Clipboard, twttr */
 __webpack_require__(0);
 
 (() => {
@@ -111,8 +111,8 @@ __webpack_require__(0);
   function showList(poll) {
     const url = `https://pick.moe/${poll.user}`;
     $('#link').innerHTML = `<a href="${url}" rel="noopener noreferrer" target="_blank">${url}</a>`;
-    $('#reddit').value = `Pick something from my PTW list! [pick.moe/${poll.user}](${url})`;
-    $('.twitter-share-button').setAttribute('data-text', `Pick something from my PTW list! ${url}`);
+    $('#reddit-md').value = `Pick something from my PTW list! [pick.moe/${poll.user}](${url})`;
+    twttr.widgets.createShareButton('/', $('#twitter'), { size: 'large', text: `Pick something from my PTW list! ${url}` });
     $('#newList').classList.remove('hidden');
   }
 
@@ -140,12 +140,16 @@ __webpack_require__(0);
   $('#help').on('click', () => {
     $('#helpModal').classList.add('is-active');
   });
-  // Close the help modal
-  $('.modal-background').on('click', () => {
-    $('.is-active').classList.remove('is-active');
+  // Open the reddit modal
+  $('#reddit').on('click', () => {
+    $('#redditModal').classList.add('is-active');
   });
-  $('.modal-close').on('click', () => {
-    $('.is-active').classList.remove('is-active');
+  // Close modals
+  Array.from($$('.modal-background')).forEach(e => {
+    e.on('click', () => $('.is-active').classList.remove('is-active'));
+  });
+  Array.from($$('.modal-close')).forEach(e => {
+    e.on('click', () => $('.is-active').classList.remove('is-active'));
   });
 })();
 

@@ -33,12 +33,9 @@ block content
             .content
               p Success! Your poll can be found here:
               p.tcenter#link link goes here
-              p post on reddit
-                input#reddit
-                button.copy(data-clipboard-target='#reddit') #[i(id='help' class='fa fa-clipboard' aria-hidden='true')]
-              p Tweet
-                a(href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-show-count="false") Tweet
-              p bbcode
+              p.tcenter
+                button#reddit Post on reddit #[i(class='fa fa-reddit' aria-hidden='true')]
+              p.tcenter#twitter
   .modal#helpModal
     .modal-background
     .modal-content
@@ -48,9 +45,17 @@ block content
         h4.tcenter Is it secure?
         p Pick uses the same technology that MAL does for security. Your credentials will be passed along to MAL to make sure you are a valid user, and then immediately discarded. #[a(href='https://github.com/gilmoreg/pick/blob/master/controllers/mal.js' rel='noopener noreferrer' target='_blank') See the source code here].
     button.modal-close
-
+  .modal#redditModal
+    .modal-background
+    .modal-content
+      .box(style='max-width: 400px; margin: 0 auto')
+        p.tcenter#reddit Post on reddit #[i(class='fa fa-reddit' aria-hidden='true')]
+        p.tcenter Copy and paste into a Reddit comment!
+        p.tcenter #[input(id="reddit-md")]
+          button.copy(data-clipboard-target='#reddit-md') #[i(class='fa fa-clipboard' aria-hidden='true')]
+    button.modal-close
 
 block scripts
-  script(src="//platform.twitter.com/widgets.js" charset="utf-8")
+  script(src="https://platform.twitter.com/widgets.js" charset="utf-8")
   script(type="text/javascript" src="/scripts/clipboard.min.js")
   script(type="text/javascript" src="/scripts/home.js")
