@@ -2,6 +2,9 @@ extends layout
 
 include mixins/_listModal
 
+block title
+  title= `Pick.moe - ${user}`
+
 block styles
   link(rel="stylesheet" href="../bulma.css")
   link(rel="stylesheet" href="../style.css")

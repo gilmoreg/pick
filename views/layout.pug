@@ -2,7 +2,8 @@ doctype html
 html(lang="en-US")
   head
     meta(charset="utf-8")
-    title= `Pick.moe - ${title ? title : 'Home'}`
+    block title
+      title= 'Pick.moe - Home'
     meta(name="description" content="Create a poll from your Myanimelist Plan To Watch list!")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css")
