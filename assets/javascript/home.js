@@ -31,6 +31,13 @@ require('./bling.js');
     $('#newList').classList.remove('hidden');
   }
 
+  const showMalError = (err) => {
+    $('#mal-error').innerHTML = err;
+    setTimeout(() => {
+      $('#mal-error').innerHTML = '';
+    }, 4000);
+  };
+
   function submitForm(e) {
     e.preventDefault();
     if (!submit.disabled) {
@@ -41,12 +48,9 @@ require('./bling.js');
       .then((res) => {
         submit.classList.remove('is-loading');
         if (res.poll) showList(res.poll);
-        else throw Error('Username and password did not match.');
+        else showMalError('Username and password did not match or no user found.');
       })
-      .catch((err) => {
-        // TODO
-        console.error(Error(err));
-      });
+      .catch(err => console.error(Error(err)));
     }
   }
 
