@@ -9,25 +9,32 @@ block content
   .section#createPoll
     .columns
       .column.is-narrow.div.mcenter
-        .card
-          header.card-header
-            p.card-header-title Create a Poll
-          .card-content
-            .content
-              form.tcenter(id='credentials' action='/mal/list' method='post')
-                p Please enter your MyAnimeList login.
-                p These values will never be stored. #[i(id='help' class='fa fa-question-circle-o' aria-hidden='true')]
-                .field
-                  p.control.tcenter
-                    input(type='text' id='mal-username' placeholder='mal username' required)
-                .field
-                  p.control.tcenter
-                    input(type='password' id='mal-password' placeholder='mal password' required)
-                  .mal-error.error
-                .field
-                  p.control.tcenter
-                    button.button#submitForm Submit
-                #mal-error.tcenter.error
+        .section(style='max-width: 640px')
+          .card
+            .card-content
+              .content.tcenter
+                p Want to know which anime you should watch next? Pick.moe will take your Plan To Watch list from Myanimelist and generate a poll you can share!
+                p Just enter your Myanimelist login and get a poll in seconds!
+        .section(style='max-width: 400px').mcenter
+          .card
+            header.card-header
+              p.card-header-title Create a Poll
+            .card-content
+              .content
+                form.tcenter(id='credentials' action='/mal/list' method='post')
+                  p Please enter your MyAnimeList login.
+                  p These values will never be stored. #[i(id='help' class='fa fa-question-circle-o' aria-hidden='true')]
+                  .field
+                    p.control.tcenter
+                      input(type='text' id='mal-username' placeholder='mal username' required)
+                  .field
+                    p.control.tcenter
+                      input(type='password' id='mal-password' placeholder='mal password' required)
+                    .mal-error.error
+                  .field
+                    p.control.tcenter
+                      button.button#submitForm Submit
+                  #mal-error.tcenter.error
   .section.hidden#newList
     .columns
       .column.is-narrow.div.mcenter
