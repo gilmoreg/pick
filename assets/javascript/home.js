@@ -1,4 +1,4 @@
-/* globals $, $$, btoa, fetch, Clipboard, twttr */
+/* globals $, $$, btoa, fetch, Clipboard, twttr, window */
 require('./bling.js');
 
 (() => {
@@ -22,7 +22,7 @@ require('./bling.js');
     .catch(err => Error(err));
 
   function showList(poll) {
-    const url = `https://pick.moe/${poll.user}`;
+    const url = `${window.location.origin}/${poll.user}`;
     $('#link').innerHTML = `<a href="${url}" rel="noopener noreferrer" target="_blank">${url}</a>`;
     $('#reddit-md').value = `Pick something from my PTW list! [pick.moe/${poll.user}](${url})`;
     twttr.widgets.createShareButton('/',

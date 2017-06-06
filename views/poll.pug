@@ -16,7 +16,9 @@ block content
           each anime in poll.list
             li(data-animeID=anime.id)
               .columns.is-mobile
-                .column.is-12.tcenter #{anime.title}
+                .column.is-2
+                  img(src=anime.image)
+                .column.is-10 #{anime.title}
   each anime in poll.list
     +listModal(anime)            
 
