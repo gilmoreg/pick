@@ -70,7 +70,7 @@ exports.vote = async (ctx) => {
         // This user already voted in this poll
         return ctx.render('result', { user, poll, vote: ctx.cookie[user] });
       }
-      ctx.cookies.set(user, id, { httpOnly: false });
+      ctx.cookies.set(user, id, { httpOnly: false, expires: new Date(Date.now() + (24 * 60 * 60 * 1000)) });
       ctx.status = 200;
       ctx.body = { user, id, poll };
       return ctx;
