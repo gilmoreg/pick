@@ -1,4 +1,4 @@
-/* globals $, $$, btoa, fetch, Clipboard, twttr, window */
+/* globals $, $$, btoa, fetch, Clipboard, twttr, window, document */
 require('./bling.js');
 
 (() => {
@@ -57,8 +57,13 @@ require('./bling.js');
   // Event listeners
   credentials.on('submit', submitForm);
   clipboard.on('success', () => {
-    // TODO show a tooltip
-    console.log('copied');
+    const tooltip = document.createElement('span');
+    tooltip.classList.add('tooltiptext');
+    tooltip.innerHTML = ' Copied! ';
+    $('.copy').appendChild(tooltip);
+    setTimeout(() => {
+      $('.copy').removeChild($('.tooltiptext'));
+    }, 2000);
   });
 
   // Open the help modal
