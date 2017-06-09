@@ -31,7 +31,7 @@ app
     [
       { method: 'POST', path: /\/.+\/vote/i },
     ],
-    interval: process.env.RATELIMIT || 10000,
+    interval: parseInt(process.env.RATELIMIT, 10) || 10000,
     max: 2,
   }))
   // Parse cookies
