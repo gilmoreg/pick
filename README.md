@@ -14,7 +14,9 @@ Many fans of anime keep track of shows they plan to watch on a site called Myani
 
 ## Build
 Requires the following environment variable:
-* DATABASE=mongodb://<user>:<password@<host>/pick
+```
+DATABASE=mongodb://<user>:<password>@<host>/pick
+```
 
 ```
 git clone https://github.com/gilmoreg/pick.git
