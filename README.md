@@ -1,4 +1,4 @@
-# pick
+# Pick.moe
 by [Grayson Gilmore](https://github.com/gilmoreg/).
 
 [See the live site here](https://www.pick.moe/).
