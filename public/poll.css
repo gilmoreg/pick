@@ -24,3 +24,9 @@
 .vote-button {
   width: 100%;
 }
+
+.voted-for {
+  border: 1px solid #6FCBAF;
+  background-color: #6FCBAF;
+  border-radius: 5px;
+}

@@ -18,12 +18,17 @@ block content
             a(href=`https://myanimelist.net/anime/${poll.list[0].id}/` rel='noopener noreferrer' target='_blank' title=poll.list[0].title) #{poll.list[0].title}
           figure.tcenter
             img(src=poll.list[0].image)
-      p.tcenter You voted for #{vote}
       .box
         h1.tcenter Vote Totals:
         ul
           each anime in poll.list
-            li(data-animeID=anime.id, style='cursor: default')
-              .columns.is-mobile
-                .column.is-10 #{anime.title}
-                .column.is-2.vote-count #{anime.votes}        
+            if (vote == anime.id)
+              li.voted-for(data-animeID=anime.id, style='cursor: default')
+                .columns.is-mobile
+                  .column.is-10 #{anime.title}
+                  .column.is-2.vote-count #{anime.votes} 
+            else
+              li(data-animeID=anime.id, style='cursor: default')
+                .columns.is-mobile
+                  .column.is-10 #{anime.title}
+                  .column.is-2.vote-count #{anime.votes} 
