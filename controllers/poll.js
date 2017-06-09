@@ -20,7 +20,8 @@ exports.result = async (ctx) => {
     }
     const { name: user } = ctx.params;
     let vote = null;
-    if (ctx.cookie && ctx.cookie.vote && ctx.cookie.vote[user]) vote = ctx.cookie.vote[user];
+    // Get vote ID for this user out of the cookie if it exists
+    if (ctx.cookie && ctx.cookie[user]) vote = ctx.cookie[user];
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
     if (poll) {
