@@ -43,7 +43,13 @@ exports.poll = async (ctx) => {
     const { name: user } = ctx.params;
     // Get a poll from the database
     const poll = await Poll.findOne({ user }, { user: 1, list: 1, _id: 0 });
-    if (poll) return ctx.render('poll', { user, poll });
+    if (poll) {
+      if (ctx.cookie && ctx.cookie[user]) {
+        // This user already voted in this poll
+        return ctx.render('result', { user, poll, vote: ctx.cookie[user] });
+      }
+      return ctx.render('poll', { user, poll });
+    }
     return ctx.render('home', { error: `Poll ${user} not found.` });
   } catch (err) {
     return ctx.throw(400, new Error(`GET /:name failure: ${err}`));
@@ -60,6 +66,10 @@ exports.vote = async (ctx) => {
       { $inc: { 'list.$.votes': 1 },
       });
     if (poll) {
+      if (ctx.cookie && ctx.cookie[user]) {
+        // This user already voted in this poll
+        return ctx.render('result', { user, poll, vote: ctx.cookie[user] });
+      }
       ctx.cookies.set(user, id, { httpOnly: false });
       ctx.status = 200;
       ctx.body = { user, id, poll };
