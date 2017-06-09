@@ -13,7 +13,7 @@ Many fans of anime keep track of shows they plan to watch on a site called Myani
 * See the source for other details
 
 ## Build
-Requires the following environment variable:
+Requires the following environment variable (or an instance of MongoDB running on the same host):
 ```
 DATABASE=mongodb://<user>:<password>@<host>/pick
 ```
