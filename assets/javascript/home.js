@@ -29,6 +29,7 @@ require('./bling.js');
       $('#twitter'),
       { size: 'large', text: `Pick something from my PTW list! ${url}` });
     $('#newList').classList.remove('hidden');
+    $('#newList').scrollIntoView();
   }
 
   const showMalError = (err) => {

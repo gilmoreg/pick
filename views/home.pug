@@ -13,8 +13,12 @@ block content
           .card
             .card-content
               .content.tcenter
-                p Want to know which anime you should watch next? Pick.moe will take your Plan To Watch list from Myanimelist and generate a poll you can share!
-                p Just enter your Myanimelist login and get a poll in seconds!
+                p.tleft Ever had a long list of shows you want to watch and don't know where to start? What if you could create a poll out of your list, share it with your friends, and have them vote on what you should watch next?
+                p.tleft For fans of anime, #[strong Pick] makes this easy by creating a poll out of a MyAnimeList Plan To Watch list which can be shared on social media.
+                p.tleft If you aren't a fan of anime and don't have a MAL account, no problem! You can still see the site in action using the demo account.
+                p Username: pickdemo
+                p Password: p1ckm03d3m0
+                p.tleft Just enter your Myanimelist login and get a poll in seconds! Then click the link to your new poll and vote for something to see the results!
         .section(style='max-width: 400px').mcenter
           .card
             header.card-header
@@ -26,10 +30,10 @@ block content
                   p These values will never be stored. #[i(id='help' class='fa fa-question-circle-o' aria-hidden='true')]
                   .field
                     p.control.tcenter
-                      input(type='text' id='mal-username' placeholder='mal username' required)
+                      input(type='text' id='mal-username' placeholder='mal username' value='pickdemo' required)
                   .field
                     p.control.tcenter
-                      input(type='password' id='mal-password' placeholder='mal password' required)
+                      input(type='password' id='mal-password' placeholder='mal password' value='p1ckm03d3m0' required)
                     .mal-error.error
                   .field
                     p.control.tcenter
